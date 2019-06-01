@@ -1,8 +1,8 @@
 {
     "test":{
-        
+        "MONGO_URI":""
     },
     "development":{
-        
+        "MONGODB_URI":"mongodb://localhost:27017/BookieDB"
     }
 }

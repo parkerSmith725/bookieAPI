@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const http = require('http');
+const _ = require('lodash');
 
 require('./config/config');
 require('./db/mongoose');
@@ -20,10 +21,14 @@ var server = http.createServer(app);
 
 const {User} = require('./models/users');
 
-app.get('/',(req,res) => {
-    console.log('server');
+app.post('/signup',(req,res) => {
+    let userTemp = _.pick(req.body,['email','firstName','lastName']);
+    
     let user = new User({
-        firstName:'Test User'
+        firstName:userTemp.firstName,
+        lastName:userTemp.lastName,
+        email:userTemp.email,
+        type:'Band'
     });
 
     user.save().then(() => {

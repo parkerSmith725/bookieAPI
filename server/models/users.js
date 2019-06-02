@@ -13,6 +13,9 @@ let UserSchema = new mongoose.Schema({
     type:{
         type:String,
         enum:['Band','Event']
+    },
+    bandName:{
+        type:String
     }
 }); 
 

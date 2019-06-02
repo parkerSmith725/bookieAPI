@@ -22,13 +22,14 @@ var server = http.createServer(app);
 const {User} = require('./models/users');
 
 app.post('/signup',(req,res) => {
-    let userTemp = _.pick(req.body,['email','firstName','lastName','type']);
+    let userTemp = _.pick(req.body,['email','firstName','lastName','type','bandName']);
     
     let user = new User({
         firstName:userTemp.firstName,
         lastName:userTemp.lastName,
         email:userTemp.email,
-        type:userTemp.type ? ('Band') : ('Event')
+        type:userTemp.type ? ('Band') : ('Event'),
+        bandName:userTemp.bandName || ''
     });
 
     user.save().then((user) => {

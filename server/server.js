@@ -22,17 +22,17 @@ var server = http.createServer(app);
 const {User} = require('./models/users');
 
 app.post('/signup',(req,res) => {
-    let userTemp = _.pick(req.body,['email','firstName','lastName']);
+    let userTemp = _.pick(req.body,['email','firstName','lastName','type']);
     
     let user = new User({
         firstName:userTemp.firstName,
         lastName:userTemp.lastName,
         email:userTemp.email,
-        type:'Band'
+        type:userTemp.type ? ('Band') : ('Event')
     });
 
-    user.save().then(() => {
-        res.send('Hello API!');
+    user.save().then((user) => {
+        res.send(user);
     }).catch(() => {
         res.status(400).send();
     });
